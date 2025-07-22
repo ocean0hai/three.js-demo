@@ -1,0 +1,12 @@
+// only scss variables
+
+$--colors: (
+  'primary': (
+    'base': #589ef8,
+  ),
+);
+$--ep-menu-item-height: 80px;
+
+@forward 'element-plus/theme-chalk/src/dark/var.scss' with (
+  $colors: $--colors
+);
