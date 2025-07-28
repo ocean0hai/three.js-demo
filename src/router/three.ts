@@ -46,6 +46,15 @@ const router: RouteRecordRaw[] = [
       keepAlive: true,
     },
   },
+  {
+    path: 'demo-6',
+    name: 'demo-6',
+    component: () => import('@/pages/three.js/demo-6.vue'),
+    meta: {
+      title: '几何体的多面材质',
+      keepAlive: true,
+    },
+  },
 ]
 
 export default {

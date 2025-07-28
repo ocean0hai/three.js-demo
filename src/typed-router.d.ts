@@ -24,5 +24,6 @@ declare module 'vue-router/auto-routes' {
     '/three.js/demo-3': RouteRecordInfo<'/three.js/demo-3', '/three/js/demo-3', Record<never, never>, Record<never, never>>,
     '/three.js/demo-4': RouteRecordInfo<'/three.js/demo-4', '/three/js/demo-4', Record<never, never>, Record<never, never>>,
     '/three.js/demo-5': RouteRecordInfo<'/three.js/demo-5', '/three/js/demo-5', Record<never, never>, Record<never, never>>,
+    '/three.js/demo-6': RouteRecordInfo<'/three.js/demo-6', '/three/js/demo-6', Record<never, never>, Record<never, never>>,
   }
 }
