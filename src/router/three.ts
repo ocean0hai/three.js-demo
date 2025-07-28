@@ -37,6 +37,15 @@ const router: RouteRecordRaw[] = [
       keepAlive: true,
     },
   },
+  {
+    path: 'demo-5',
+    name: 'demo-5',
+    component: () => import('@/pages/three.js/demo-5.vue'),
+    meta: {
+      title: '几何体、点、线、面',
+      keepAlive: true,
+    },
+  },
 ]
 
 export default {

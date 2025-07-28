@@ -7,7 +7,6 @@ import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min'
 
 // 场景 scene
 const scene = new THREE.Scene()
-let parent = null
 const screenRef = ref<HTMLElement | null>(null)
 let resizeObserver: ResizeObserver | null = null
 const sizes = {
@@ -40,23 +39,6 @@ function renderWebGL() {
   // 获取页面元素
   const dom = document.getElementById('test')
   dom?.appendChild(renderer.domElement)
-
-  // 创建一个几何图形
-  const geometry = new THREE.BoxGeometry(1, 1, 1)
-  // 使用什么材质
-  const material = new THREE.MeshLambertMaterial({
-    color: '#129b12', // 绿色
-  })
-  // 网格
-  parent = new THREE.Mesh(geometry, material)
-
-  // 父元素位置
-  parent.position.set(0, 0, 0)
-  // 缩放也是如此
-  parent.scale.set(1, 1, 1)
-
-  // 加入场景中
-  scene.add(parent)
 
   // 添加辅助线
   const axesHelper = new THREE.AxesHelper(5)
@@ -105,54 +87,72 @@ function createGui() {
 
   gui.add(eventObj, 'fullScreenFn').name('全屏')
   gui.add(eventObj, 'exitFullScreenFn').name('退出全屏')
-  const folder = gui.addFolder('立方体位置') //生成文件夹  添加分组
-  folder.add(parent.position, 'x')
-    .min(-10)
-    .max(10)
-    .step(1)
-    .name('立方体x轴位置')
-    .onChange((val) => {
-      console.log(val, '立方体位置')
-    })
-  folder
-    .add(parent.position, 'y')
-    .min(-10)
-    .max(10)
-    .step(1)
-    .name('立方体y轴位置')
-    .onFinishChange((val) => {
-      console.log(val, '立方体位置')
-    })
-  folder.add(parent.position, 'z').min(-10).max(10).step(1).name('立方体z轴位置')
+}
 
-  // 设置颜色
-  // 初始化颜色
-  const colorParams = {
-    color: '#00FF00', // 默认颜色
-  }
-  folder.addColor(colorParams, 'color').name('立方体颜色').onChange((color) => {
-    // 更新材质颜色
-    parent.material.color.set(color)
+// 创建一个三角形
+function createTriangle() {
+  // 几何体
+  const geometry = new THREE.BufferGeometry()
+  // 顶点数据，有正反面，逆时针为正面（切换相机视角会看不到），顺时针为反面
+  const vertices = new Float32Array([
+    1, 1, 0, // 顶点1
+    -1, -1, 0, // 顶点2
+    1, -1, 0, // 顶点3
+  ])
+  geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3))
+  console.log('%c [ geometry ]-103', 'font-size:13px; background:pink; color:#bf2c9f;', geometry)
+
+  // 材质
+  const material = new THREE.MeshBasicMaterial({
+    color: 0x00ff00,
+    side: THREE.DoubleSide, // 双面可见
+    wireframe: true, // 是否为线框模式
   })
-  // 设置线框模式
-  folder.add(parent.material, 'wireframe')
-    .name('线框模式')
-    .onChange((value) => {
-      // parent.material.wireframe = value
-    })
+
+  // 网格
+  const parent = new THREE.Mesh(geometry, material)
+  // 父元素位置
+  parent.position.set(0, 0, 0)
+  // 缩放也是如此
+  parent.scale.set(1, 1, 1)
+  // 加入场景中
+  scene.add(parent)
+  return parent
 }
 
-// 创建光源
-function createLight() {
-  const light = new THREE.PointLight(0xffffff, 1, 0, 0)
-  // 设置光源位置
-  light.position.set(130, 30, 30)
-  scene.add(light)
-  // 创建一个环境光，颜色为白色，强度为0.5
-  const lightAmbient = new THREE.AmbientLight(0xffffff, 0.5)
-  scene.add(lightAmbient)
-}
+// 使用三角形创建一个矩形
+function renderRectangle() {
+  // 几何体
+  const geometry = new THREE.BufferGeometry()
+  // 顶点数据
+  const vertices = new Float32Array([
+    1, 1, 0, // 顶点1
+    -1, -1, 0, // 顶点2
+    1, -1, 0, // 顶点3
+    -1, 1, 0, // 顶点4
+  ])
+  geometry.setAttribute('position', new THREE.BufferAttribute(vertices, 3))
+  // 创建索引
+  const indices = new Uint16Array([0, 1, 2, 3, 0, 1])
+  geometry.setIndex(new THREE.BufferAttribute(indices, 1))
 
+  // 材质
+  const material = new THREE.MeshBasicMaterial({
+    color: 0x00ff00,
+    side: THREE.DoubleSide, // 双面可见
+    wireframe: true, // 是否为线框模式
+  })
+
+  // 网格
+  const parent = new THREE.Mesh(geometry, material)
+  // 父元素位置
+  parent.position.set(0, 0, 0)
+  // 缩放也是如此
+  parent.scale.set(1, 1, 1)
+  // 加入场景中
+  scene.add(parent)
+  return parent
+}
 onMounted(() => {
   // 自适应
   const { camera, renderer } = renderWebGL()
@@ -170,7 +170,8 @@ onMounted(() => {
     resizeObserver.observe(screenRef.value)
   }
   createGui() // 创建GUI
-  createLight() // 创建光源
+  // createTriangle() // 创建三角形
+  renderRectangle()
 })
 
 </script>
