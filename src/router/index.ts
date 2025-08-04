@@ -1,7 +1,8 @@
 //router目录下的index.js
 import { createRouter, createWebHashHistory, createWebHistory, type RouteRecordRaw } from "vue-router"
 
-import three from "./three"
+import threeH from "./three-h"
+import threeC from "./three-c"
 
 const routes: RouteRecordRaw[] = [
   {
@@ -12,7 +13,8 @@ const routes: RouteRecordRaw[] = [
       title: '首页',
     },
   },
-  three,
+  threeH,
+  threeC,
 ]
 
 /**
