@@ -5,11 +5,11 @@ import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min';
 import { onMounted } from 'vue';
 import { useBasicTemplate } from '@/hooks/useBasicTemplate';
 // 自适应
-const { scene, screenRef, renderer, init } = useBasicTemplate();
+const { scene, screenRef, init } = useBasicTemplate();
 
 // 创建GUI   （用gui替代上一节点击事件
 const gui = new GUI();
-//lil gui 调试开发3d效果
+// lil gui 调试开发3d效果
 const eventObj = {
   fullScreenFn: () => {
     document.body.requestFullscreen();
