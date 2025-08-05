@@ -2,20 +2,29 @@ import { RouteRecordRaw } from 'vue-router'
 
 const router: RouteRecordRaw[] = [
   {
-    path: 'demo-1',
-    name: 'demo-1',
-    component: () => import('@/pages/three.js-h/demo-1.vue'),
+    path: '/three.js-c/demo-1',
+    name: '/three.js-c/demo-1',
+    component: () => import('@/pages/three.js-c/demo-1.vue'),
     meta: {
       title: '坐标辅助-轨道控制',
       keepAlive: true,
     },
   },
   {
-    path: 'demo-2',
-    name: 'demo-2',
-    component: () => import('@/pages/three.js-h/demo-2.vue'),
+    path: '/three.js-c/demo-2',
+    name: '/three.js-c/demo-2',
+    component: () => import('@/pages/three.js-c/demo-2.vue'),
     meta: {
       title: '位移和父子级元素',
+      keepAlive: true,
+    },
+  },
+  {
+    path: '/three.js-c/demo-3',
+    name: '/three.js-c/demo-3',
+    component: () => import('@/pages/three.js-c/demo-3.vue'),
+    meta: {
+      title: '位置',
       keepAlive: true,
     },
   },

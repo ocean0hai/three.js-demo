@@ -31,7 +31,7 @@ const active = computed(() => {
           </el-icon>
           {{ item.meta?.title }}
         </template>
-        <el-menu-item v-for="it in item.children" :key="it.path" :index="`${item.path}/${it.path}`">
+        <el-menu-item v-for="it in item.children" :key="it.path" :index="it.path">
           <el-icon>
             <IconMenu />
           </el-icon>
@@ -40,7 +40,7 @@ const active = computed(() => {
           </template>
         </el-menu-item>
       </el-sub-menu>
-      <el-menu-item v-else :index="`${item.path}`">
+      <el-menu-item v-else :index="item.path">
         <template #title>
           <el-icon>
             <IconMenu />
