@@ -24,14 +24,14 @@ const active = computed(() => {
 <template>
   <el-menu router style="width: 300px;" :default-active="active" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
     <div v-for="item in routers" :key="item.path">
-      <el-sub-menu v-if="item?.children && item?.children.length > 0" :index="item.path">
+      <el-sub-menu v-if="item?.children && item?.children.length > 0" :index="item.path || item.name">
         <template #title>
           <el-icon>
             <IconMenu />
           </el-icon>
           {{ item.meta?.title }}
         </template>
-        <el-menu-item v-for="it in item.children" :key="it.path" :index="it.path">
+        <el-menu-item v-for="it in item.children" :key="it.path" :index="it.path || it.name">
           <el-icon>
             <IconMenu />
           </el-icon>
@@ -40,7 +40,7 @@ const active = computed(() => {
           </template>
         </el-menu-item>
       </el-sub-menu>
-      <el-menu-item v-else :index="item.path">
+      <el-menu-item v-else :index="item.path || item.name">
         <template #title>
           <el-icon>
             <IconMenu />
