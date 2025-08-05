@@ -15,6 +15,8 @@ export default antfu({
     'vue/use-v-on-event-modifiers': 'off',
     'vue/no-undef-components': 'off',
     'import/order': 'off',
+    'no-extra-semi': 'off',
+
     // TypeScript 规则
     '@typescript-eslint/no-explicit-any': 'off', // 允许使用any类型，方便开发
     '@typescript-eslint/no-empty-function': 'off',

@@ -40,7 +40,7 @@ function loadTexture() {
       console.log('Texture loaded successfully');
     },
     undefined,
-    (error) => {
+    (error: object) => {
       console.error('An error occurred while loading the texture:', error);
     }
   );
@@ -57,8 +57,7 @@ function loadTexture() {
 
 <template>
   <el-card>
-    <div id="screen"
-      ref="screenRef">
+    <div id="screen" ref="screenRef">
       <div id="test" />
     </div>
   </el-card>
